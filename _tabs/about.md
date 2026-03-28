@@ -8,4 +8,4 @@ pin: true
 Hi, I am Tri (pronounced “Tree”). I am currently an MSc Economics student at the University of Surrey, aiming to pursue a PhD. My research currently focuses on Microeconomics and Labour Economics. Recently, I received the SEDarc DTP studentship for 4.5 years of PhD study at the University of Surrey.
 
 - You can view and download a copy of my CV here.
-- You can view all my research here.
+- You can view all my research [here](https://owenjuu.github.io/research/).
