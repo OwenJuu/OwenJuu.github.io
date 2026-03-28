@@ -1,0 +1,190 @@
+/* ============================================================
+   Research Page — Custom Paper Entry Styles
+   Place this file at: assets/css/research.css
+   Then import it in your _config.yml or link it in your page.
+   ============================================================ */
+
+/* ---------- Paper Card ---------- */
+.paper-entry {
+  border-left: 3px solid var(--link-color, #4a9eff);
+  padding: 1.1rem 1.25rem 1rem 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 0 6px 6px 0;
+  background: var(--card-bg, transparent);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.paper-entry:hover {
+  border-color: var(--link-hover-color, #2e7fd4);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* ---------- Paper Title ---------- */
+/* Supports plain text, <em>, <strong>, or any inline HTML */
+.paper-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.45;
+  margin: 0 0 0.4rem 0;
+  color: var(--heading-color, inherit);
+}
+
+.paper-title em {
+  font-style: italic;
+  font-weight: inherit;
+}
+
+/* ---------- Paper Meta (authors, venue, year) ---------- */
+.paper-meta {
+  font-size: 0.875rem;
+  color: var(--text-muted-color, #888);
+  margin: 0 0 0.65rem 0;
+  line-height: 1.5;
+}
+
+.paper-meta .venue {
+  font-style: italic;
+}
+
+/* ---------- Tag / Badge row ---------- */
+.paper-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.7rem;
+}
+
+.paper-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.15em 0.6em;
+  border-radius: 3px;
+  border: 1px solid var(--link-color, #4a9eff);
+  color: var(--link-color, #4a9eff);
+  background: transparent;
+}
+
+/* ---------- Action links row (PDF, Code, Slides…) ---------- */
+.paper-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.55rem;
+}
+
+.paper-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  font-size: 0.825rem;
+  font-weight: 500;
+  color: var(--link-color, #4a9eff);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--link-color, #4a9eff);
+  padding-bottom: 1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.paper-link:hover {
+  color: var(--link-hover-color, #2e7fd4);
+  border-bottom-color: var(--link-hover-color, #2e7fd4);
+  text-decoration: none;
+}
+
+/* ---------- Abstract Toggle Button ---------- */
+.abstract-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  font-size: 0.825rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-muted-color, #888);
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 0.15rem;
+  transition: color 0.15s;
+  user-select: none;
+}
+
+.abstract-toggle:hover {
+  color: var(--link-color, #4a9eff);
+}
+
+/* Animated chevron arrow */
+.abstract-toggle::before {
+  content: "▸";
+  display: inline-block;
+  font-size: 0.75em;
+  transition: transform 0.25s ease;
+  transform-origin: center;
+}
+
+.abstract-toggle.open::before {
+  transform: rotate(90deg);
+}
+
+.abstract-toggle.open {
+  color: var(--link-color, #4a9eff);
+}
+
+/* ---------- Abstract Body ---------- */
+.abstract-body {
+  /* Collapsed state */
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+  overflow: hidden;
+}
+
+.abstract-body.open {
+  grid-template-rows: 1fr;
+}
+
+/* Inner wrapper needed for grid animation trick */
+.abstract-body-inner {
+  overflow: hidden;
+}
+
+.abstract-content {
+  margin-top: 0.85rem;
+  padding: 0.9rem 1rem;
+  border-radius: 4px;
+  background: var(--sidebar-bg, rgba(128,128,128,0.05));
+  border: 1px solid var(--border-color, rgba(128,128,128,0.15));
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-color, inherit);
+}
+
+/* Rich text inside the abstract */
+.abstract-content p {
+  margin: 0 0 0.8em 0;
+}
+
+.abstract-content p:last-child {
+  margin-bottom: 0;
+}
+
+.abstract-content strong {
+  font-weight: 700;
+  color: var(--heading-color, inherit);
+}
+
+.abstract-content em {
+  font-style: italic;
+}
+
+.abstract-content a {
+  color: var(--link-color, #4a9eff);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.abstract-content a:hover {
+  color: var(--link-hover-color, #2e7fd4);
+}

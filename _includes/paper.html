@@ -1,0 +1,110 @@
+{%- comment -%}
+  _includes/paper.html
+  ─────────────────────────────────────────────────────────────────────────────
+  Reusable component for a single research paper entry on your Research page.
+
+  USAGE  (inside any .md page using include):
+
+    {% include paper.html
+      title    = "Your Paper Title — can include <em>italics</em>"
+      authors  = "Author One, <strong>Author Two</strong>, Author Three"
+      venue    = "Conference / Journal Name"
+      year     = "2024"
+      tags     = "NLP, Machine Learning"
+      pdf      = "https://example.com/paper.pdf"
+      code     = "https://github.com/you/repo"
+      slides   = "https://example.com/slides.pdf"
+      abstract = "Your abstract HTML goes here. Supports
+                  <strong>bold</strong>, <em>italic</em>,
+                  <a href='...'>links</a>, and multiple paragraphs
+                  separated by </p><p>."
+    %}
+
+  REQUIRED parameters:
+    title     — Paper title. HTML inline elements (<em>, <strong>) are fine.
+
+  OPTIONAL parameters:
+    authors   — Author list string. Bold yourself with <strong>.
+    venue     — Conference or journal name (will be italicised).
+    year      — Publication year.
+    tags      — Comma-separated tag labels, e.g. "NLP, Vision".
+    pdf       — URL to PDF.
+    code      — URL to code repository.
+    slides    — URL to slide deck.
+    poster    — URL to poster.
+    abstract  — HTML content for the abstract panel (multi-paragraph OK).
+    id        — Optional unique id; auto-generated from title if omitted.
+{%- endcomment -%}
+
+{%- assign _id = include.id | default: include.title | slugify -%}
+
+<div class="paper-entry">
+
+  {%- comment %} ── Title ──────────────────────────────────────────── {% endcomment %}
+  <p class="paper-title">{{ include.title }}</p>
+
+  {%- comment %} ── Authors + Venue + Year ──────────────────────────── {% endcomment %}
+  {%- if include.authors or include.venue or include.year %}
+  <p class="paper-meta">
+    {%- if include.authors %}{{ include.authors }}{%- endif %}
+    {%- if include.authors and include.venue %} &middot; {% endif %}
+    {%- if include.venue %}<span class="venue">{{ include.venue }}</span>{%- endif %}
+    {%- if include.year %} ({{ include.year }}){%- endif %}
+  </p>
+  {%- endif %}
+
+  {%- comment %} ── Tags ────────────────────────────────────────────── {% endcomment %}
+  {%- if include.tags %}
+  <div class="paper-tags">
+    {%- assign _tags = include.tags | split: "," %}
+    {%- for tag in _tags %}
+    <span class="paper-tag">{{ tag | strip }}</span>
+    {%- endfor %}
+  </div>
+  {%- endif %}
+
+  {%- comment %} ── Links row ───────────────────────────────────────── {% endcomment %}
+  {%- if include.pdf or include.code or include.slides or include.poster %}
+  <div class="paper-links">
+    {%- if include.pdf %}
+    <a class="paper-link" href="{{ include.pdf }}" target="_blank" rel="noopener">
+      📄 PDF
+    </a>
+    {%- endif %}
+    {%- if include.code %}
+    <a class="paper-link" href="{{ include.code }}" target="_blank" rel="noopener">
+      💻 Code
+    </a>
+    {%- endif %}
+    {%- if include.slides %}
+    <a class="paper-link" href="{{ include.slides }}" target="_blank" rel="noopener">
+      🖥️ Slides
+    </a>
+    {%- endif %}
+    {%- if include.poster %}
+    <a class="paper-link" href="{{ include.poster }}" target="_blank" rel="noopener">
+      🪧 Poster
+    </a>
+    {%- endif %}
+  </div>
+  {%- endif %}
+
+  {%- comment %} ── Abstract toggle ─────────────────────────────────── {% endcomment %}
+  {%- if include.abstract %}
+  <button
+    class="abstract-toggle"
+    aria-expanded="false"
+    aria-controls="abstract-{{ _id }}"
+    onclick="toggleAbstract(this)"
+  >Abstract</button>
+
+  <div class="abstract-body" id="abstract-{{ _id }}" role="region">
+    <div class="abstract-body-inner">
+      <div class="abstract-content">
+        <p>{{ include.abstract }}</p>
+      </div>
+    </div>
+  </div>
+  {%- endif %}
+
+</div>
